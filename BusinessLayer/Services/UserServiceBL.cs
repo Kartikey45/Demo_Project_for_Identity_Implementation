@@ -17,6 +17,19 @@ namespace BusinessLayer.Services
             this.userService = userService;
         }
 
+        public async Task<UserManagerResponse> LoginUserAsync(LoginViewModel model)
+        {
+            try
+            {
+                var data = await userService.LoginUserAsync(model);
+                return data;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public async Task<UserManagerResponse> RegisterUserAsync(RegisterViewModel model)
         {
             try

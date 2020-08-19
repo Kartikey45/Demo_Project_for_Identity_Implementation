@@ -22,7 +22,8 @@ namespace Employees.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> RegisterAsync(RegisterViewModel model)
+        [Route("Register")]
+        public async Task<ActionResult> RegisterAsync([FromBody]RegisterViewModel model)
         {
             try
             {
@@ -53,5 +54,35 @@ namespace Employees.Controllers
                 return BadRequest(new { success = false, Message = e.Message });
             }
         }
+
+        [HttpPost]
+        [Route("Login")]
+        public async Task<ActionResult> LoginAsync([FromBody]LoginViewModel model)
+        {
+            try
+            {
+                if(ModelState.IsValid)
+                {
+                    var result = await service.LoginUserAsync(model);
+
+                    if(result.IsSuccess)
+                    {
+                        return Ok(result);
+                    }
+                    else
+                    {
+                        return BadRequest(result);
+                    }
+                }
+                else
+                {
+                    return UnprocessableEntity(new { success = false, message = "Invalid Input"});
+                }
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(new { success = false, Message = ex.Message });
+            }
+        }
     }
-}
+} 

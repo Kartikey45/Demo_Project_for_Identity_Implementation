@@ -9,5 +9,7 @@ namespace BusinessLayer.Interfaces
     public interface IUserServiceBL
     {
         Task<UserManagerResponse> RegisterUserAsync(RegisterViewModel model);
+
+        Task<UserManagerResponse> LoginUserAsync(LoginViewModel model);
     }
 }
