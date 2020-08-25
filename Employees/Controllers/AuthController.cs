@@ -21,6 +21,7 @@ namespace Employees.Controllers
             this.service = service;
         }
 
+
         [HttpPost]
         [Route("Register")]
         public async Task<ActionResult> RegisterAsync([FromBody]RegisterViewModel model)
